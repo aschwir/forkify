@@ -19,6 +19,7 @@ const recipeContainer = document.querySelector('.recipe');
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
+    // const id = '5ed6604591c37cdc054bcc72zzz'
     console.log(id);
 
     if (!id) return;
@@ -32,7 +33,7 @@ const controlRecipes = async function () {
 
   }
   catch (err) {
-    console.log(err);
+    recipeView.renderError()
   }
 };
 
