@@ -16,15 +16,10 @@ if (module.hot) {
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    // const id = '5ed6604591c37cdc054bcc72zzz'
-    // console.log(id);
-
     if (!id) return;
     recipeView.renderSpinner();
-
     // Loading recipe
     await model.loadRecipe(id);
-
     //rendering recipe
     recipeView.render(model.state.recipe);
 
@@ -38,15 +33,10 @@ const controlSearchResults = async function () {
   try {
 
     resultsView.renderSpinner();
-    // console.log(resultsView);
-
     const query = searchView.getQuery();
     if (!query) return;
-
     await model.loadSearchResults(query);
-
     resultsView.render(model.getSearchResultsPage());
-
     paginationView.render(model.state.search);
   }
   catch (err) {
@@ -56,16 +46,24 @@ const controlSearchResults = async function () {
 
 const controlPagination = function (goToPage) {
   resultsView.render(model.getSearchResultsPage(goToPage));
-
   paginationView.render(model.state.search);
+};
+
+const controlServings = function (newServings) {
+  //update recipe servings(in state)
+  model.updateServings(newServings);
+  //update the view
+  recipeView.render(model.state.recipe);
+
 }
 
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 
-}
+};
 
 init();
 
