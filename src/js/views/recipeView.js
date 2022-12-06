@@ -1,7 +1,7 @@
 import View from './view'
 import icons from 'url:../../img/icons.svg';
 // import { Fraction } from 'fractional';
-import { numberToFraction } from 'helpers.js'
+import { numberToFraction } from '../helpers.js'
 
 
 class RecipeView extends View {
